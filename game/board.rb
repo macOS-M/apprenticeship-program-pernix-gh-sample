@@ -34,6 +34,21 @@ class Board
     [number / 3, number % 3]
   end
 
+  def winner?
+    lines = @grid +
+            @grid.transpose +
+            [
+              [@grid[0][0], @grid[1][1], @grid[2][2]],
+              [@grid[0][2], @grid[1][1], @grid[2][0]]
+]
+
+    lines.each do |line|
+      return line[0] if line.uniq.length == 1 && line[0] != " "
+    end
+
+    nil
+  end
+
   private
 
   def cell_number(row, col)
